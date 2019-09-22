@@ -1,6 +1,6 @@
 import unittest
 from helpers import inputRulesVector, convertToFloat, inputRulesNumber
-from lina import vectorSum
+from lina import vectorSum, vectorScale
 
 
 class TestinputRulesVector(unittest.TestCase):
@@ -87,7 +87,23 @@ class TestVectorSum(unittest.TestCase):
 
     def test_correct_negative_addition(self):
         self.assertEqual(vectorSum([-3, -123.2], [12, -1]), (9, -124.2))
-# Test vector scale
+
+
+class TestVectorScale(unittest.TestCase):
+    """test that vector scale returns scaled vector as a tuple"""
+
+    def test_allows_integer_input(self):
+        self.assertEqual(vectorScale((3, 4), 5), (15, 20))
+
+    # This test caused me to round the numbers as floating point was generating inaccuracies
+    def test_allows_float_input(self):
+        self.assertEqual(vectorScale((3.2, 3.8), 6.3), (20.16, 23.94))
+
+    def test_allows_negative_input(self):
+        self.assertEqual(vectorScale((-3, -0.5), -1), (3, 0.5))
+
+    def test_allows_zero_input(self):
+        self.assertEqual(vectorScale((0, 0), 0), (0, 0))
 
 
 if __name__ == '__main__':

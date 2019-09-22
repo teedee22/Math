@@ -13,7 +13,8 @@ def vectorSum(vectorA, vectorB):
 
 def vectorScale(vector, scalar):
     """Scale a vector by a float"""
-    scaledVector = (vector[0] * scalar, vector[1] * scalar)
+    # Rounded to 10 decimal places to avoid floating point inaccuracies
+    scaledVector = (round(vector[0] * scalar, 10), round(vector[1] * scalar, 10))
     print(f"{scalar} x {vector} = {scaledVector}")
     return scaledVector
 
