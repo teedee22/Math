@@ -25,12 +25,12 @@ def convertToFloat(vector):
 def vectorSum():
     """Takes input of two vectors and outputs the linear combination of those two vectors as a tuple"""
     while True:
-        vectorA = input("Please provide first vector in format a,b")
+        vectorA = input("Please provide first vector in format a,b: ")
         if inputRules(vectorA):
             vectorA = convertToFloat(vectorA)
             break
     while True:
-        vectorB = input("please provide second vector in format c,d")
+        vectorB = input("please provide second vector in format c,d: ")
         if inputRules(vectorB):
             vectorB = convertToFloat(vectorB)
             break
@@ -44,13 +44,13 @@ def vectorSum():
 def vectorScale():
     """Scale a vector by a float"""
     while True:
-        vector = input("Please enter a vector: ")
+        vector = input("Please enter a vector in the format a,b: ")
         # Check vector entered is valid
         if inputRules(vector):
             vector = convertToFloat(vector)
             break
     while True:
-        scalar = input("Please enter a number by which to scale the vector")
+        scalar = input("Please enter a number by which to scale the vector: ")
         # check vector entered is a number
         try:
             float(scalar)
@@ -67,16 +67,35 @@ def vectorScale():
 def main():
     while True:
         print("What calculation would you like to do today?")
-        choice = input("1 linear combination of two vectors\n2 Scale a vector\nChoose a number: ")
+        choice = input("0 to quit\n1 linear combination of two vectors\n2 Scale a vector\nChoose a number: ")
+        if choice == "0":
+            print("Thank you for using the linear algebra calculator")
+            break
         if choice == "1":
             vectorSum()
             time.sleep(1)
-        if choice == "2":
+        elif choice == "2":
             vectorScale()
             time.sleep(1)
         else:
             print("invalid choice, enter a integer corresponding to the linear algebra calculation you would like to do")
 
 
+""" Python program to plot linear algebra transformations """
+"""
+# Input matrix here where a and b are the i hat vectors and c and d are the j hat vectors
+a = 1
+b = -2
+c = 3
+d = 0
+# Input vector to transform
+vector = (-1, 2)
+
+x = vector[0] * a + vector[1] * c
+y = vector[0] * b + vector[1] * d
+
+print(str(vector[0]) + " x " + str(a) + " + " + str(vector[1]) + " x " + str(c) + " = " + str(x))
+print(str(vector[0]) + " x " + str(b) + " + " + str(vector[1]) + " x " + str(d) + " = " + str(y))
+"""
 if __name__ == "__main__":
     main()
