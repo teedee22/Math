@@ -23,7 +23,7 @@ def inputRulesNumber(number):
         float(number)
         return True
     except ValueError:
-        print("Please enter a float or int")
+        return False
 
 
 def convertToFloat(vector):
