@@ -1,5 +1,6 @@
 import unittest
-from lina import inputRulesVector, convertToFloat, vectorSum, inputRulesNumber
+from helpers import inputRulesVector, convertToFloat, inputRulesNumber
+from lina import vectorSum
 
 
 class TestinputRulesVector(unittest.TestCase):
