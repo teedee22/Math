@@ -113,13 +113,13 @@ class TestVectorTransform(unittest.TestCase):
     """Test that VectorTransform works"""
 
     def test_allows_integer_input(self):
-        self.assertEqual(vectorTransform([1, -2, 3, 0], [-1, 2]), (5.0, 2.0))
+        self.assertEqual(vectorTransform([1, -2, 3, 0], [-1, 2]), [5.0, 2.0])
 
     def test_allows_float_input(self):
-        self.assertEqual(vectorTransform([-1, 3.6, 4, 3.1], [2.7, 0.2]), (-1.9, 10.34))
+        self.assertEqual(vectorTransform([-1, 3.6, 4, 3.1], [2.7, 0.2]), [-1.9, 10.34])
 
     def test_allows_zero_input(self):
-        self.assertEqual(vectorTransform([0, 0, 0, 0], [0, 0]), (0, 0))
+        self.assertEqual(vectorTransform([0, 0, 0, 0], [0, 0]), [0, 0])
 
 
 class TestMatrixMultiplication(unittest.TestCase):
@@ -133,6 +133,9 @@ class TestMatrixMultiplication(unittest.TestCase):
 
     def test_allows_negative_input(self):
         self.assertEqual(matrixMultiplication([0, 0, 0, 0], [0, 0, 0, 0]), [0, 0, 0, 0])
+
+    def test_allows_three_dimensions(self):
+        self.assertEqual(matrixMultiplication([0,3,6,1,4,7,2,5,8], [0,5,1,-2,1,4,2,5,-1]), [6.0, 33.0, 6.0, 6.0, 44.0, 10.0, 6.0, 55.0, 14.0])
 
 if __name__ == '__main__':
     unittest.main()
