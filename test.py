@@ -1,37 +1,37 @@
 import unittest
 from helpers import inputRulesVector, convertToFloat, inputRulesNumber
-from lina import vectorSum, vectorScale, vectorTransform
+from lina import vectorSum, vectorScale, vectorTransform, matrixMultiplication
 
 
 class TestinputRulesVector(unittest.TestCase):
     """Tests inputRulesVector method with different valid and invalid inputs"""
 
     def test_allows_integer_input(self):
-        self.assertEqual(inputRulesVector("3,4"), True, "Should be True")
+        self.assertEqual(inputRulesVector("3,4", 2), True, "Should be True")
 
     def test_allows_float_input(self):
-        self.assertEqual(inputRulesVector("3.2,4.2"), True, "Should be True")
+        self.assertEqual(inputRulesVector("3.2,4.2", 2), True, "Should be True")
 
     def test_allows_spaces_after_comma(self):
-        self.assertEqual(inputRulesVector("3,     9"), True, "Should be True")
+        self.assertEqual(inputRulesVector("3,     9", 2), True, "Should be True")
 
     def test_allows_negative_input(self):
-        self.assertEqual(inputRulesVector("-32.1, -7.5"), True)
+        self.assertEqual(inputRulesVector("-32.1, -7.5", 2), True)
 
     def test_allows_zero_input(self):
-        self.assertEqual(inputRulesVector("0, 0"), True)
+        self.assertEqual(inputRulesVector("0, 0", 2), True)
 
     def test_denies_alphabetic_input(self):
-        self.assertEqual(inputRulesVector("sdsdg, sdgdg"), False, "Should be False")
+        self.assertEqual(inputRulesVector("sdsdg, sdgdg", 2), False, "Should be False")
 
     def test_denies_alphanumeric_input(self):
-        self.assertEqual(inputRulesVector("3fr34, 43fer4f"), False, "Should be False")
+        self.assertEqual(inputRulesVector("3fr34, 43fer4f", 2), False, "Should be False")
 
     def test_denies_no_comma(self):
-        self.assertEqual(inputRulesVector("3034050948509345  390850943"), False, "Should be False")
+        self.assertEqual(inputRulesVector("3034050948509345  390850943", 2), False, "Should be False")
 
-    def test_denies_too_many_commas(self):
-        self.assertEqual(inputRulesVector("3, 4, 5"), False, "Should be False")
+    def test_accepts_more_then_two_inputs(self):
+        self.assertEqual(inputRulesVector("3, 4, 5, 6", 4), True,)
 
 
 class TestConvertToFloat(unittest.TestCase):
@@ -39,6 +39,9 @@ class TestConvertToFloat(unittest.TestCase):
 
     def test_converts_int_string_to_float(self):
         self.assertEqual(convertToFloat("3,4"), [3.0, 4.0])
+
+    def test_converts_matrices_to_float(self):
+        self.assertEqual(convertToFloat("1,2,3,4"), [1.0, 2.0, 3.0, 4.0])
 
     def test_converts_float_string_to_float(self):
         self.assertEqual(convertToFloat("3.345,9.235"), [3.345, 9.235])
@@ -110,14 +113,26 @@ class TestVectorTransform(unittest.TestCase):
     """Test that VectorTransform works"""
 
     def test_allows_integer_input(self):
-        self.assertEqual(vectorTransform([1, -2], [3, 0], [-1, 2]), (5.0, 2.0))
+        self.assertEqual(vectorTransform([1, -2, 3, 0], [-1, 2]), (5.0, 2.0))
 
     def test_allows_float_input(self):
-        self.assertEqual(vectorTransform([-1, 3.6], [4, 3.1], [2.7, 0.2]), (-1.9, 10.34))
+        self.assertEqual(vectorTransform([-1, 3.6, 4, 3.1], [2.7, 0.2]), (-1.9, 10.34))
 
     def test_allows_zero_input(self):
-        self.assertEqual(vectorTransform([0, 0], [0, 0], [0, 0]), (0, 0))
+        self.assertEqual(vectorTransform([0, 0, 0, 0], [0, 0]), (0, 0))
 
+
+class TestMatrixMultiplication(unittest.TestCase):
+    """Test that matrix multiplication works"""
+
+    def test_allows_integer_input(self):
+        self.assertEqual(matrixMultiplication([1, 3, 5, 7], [2, 5, 6, 8]), [20, 29, 52, 81])
+
+    def test_allows_float_input(self):
+        self.assertEqual(matrixMultiplication([1.5, 2.5, 6.5, 4.5], [1, 2, 3, 4]), [9.0, 13.0, 20.0, 31.0])
+
+    def test_allows_negative_input(self):
+        self.assertEqual(matrixMultiplication([0, 0, 0, 0], [0, 0, 0, 0]), [0, 0, 0, 0])
 
 if __name__ == '__main__':
     unittest.main()

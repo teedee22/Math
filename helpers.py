@@ -3,13 +3,13 @@ Helper functions for linear algebra programme
 """
 
 
-def inputRulesVector(vector):
+def inputRulesVector(vector, quantity):
     """Defines rules for user entered vectors"""
     # Check user entered vector using comma
     if "," not in vector:
         return False
     # Check user entered two things separated by comma
-    elif not len(vector.split(",")) == 2:
+    elif not len(vector.split(",")) == quantity:
         return False
     # Check that user entered two numbers (floats or ints)
     try:
@@ -33,11 +33,11 @@ def convertToFloat(vector):
     return [float(i) for i in vector.split(",")]
 
 
-def getInputVector(quantity):
-    """Gets input from user, quantity is a string for first, second third etc"""
+def getInputVector(message, format, quantity):
+    """Gets input from user, quantity is a string for first, second third etc returns a list of floats"""
     while True:
-        vectorA = input(f"Please provide {quantity} vector in format x,y: ")
-        if inputRulesVector(vectorA):
+        vectorA = input(f"Please provide {message} in the format {format}: ")
+        if inputRulesVector(vectorA, quantity):
             return convertToFloat(vectorA)
 
 

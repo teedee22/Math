@@ -23,14 +23,21 @@ def vectorScale(vector, scalar):
     return scaledVector
 
 
-def vectorTransform(ihat, jhat, vector):
+def vectorTransform(matrix, vector):
     """transform a vector based from ihat/jhat matrix"""
-    x = round(vector[0] * ihat[0] + vector[1] * jhat[0], 10)
-    y = round(vector[0] * ihat[1] + vector[1] * jhat[1], 10)
-    print(f"{vector[0]} * {ihat[0]} + {vector[1]} * {jhat[0]} = {x}")
-    print(f"{vector[0]} * {ihat[1]} + {vector[1]} * {jhat[1]} = {y}")
+    x = round(vector[0] * matrix[0] + vector[1] * matrix[2], 10)
+    y = round(vector[0] * matrix[1] + vector[1] * matrix[3], 10)
+    print(f"{vector[0]} * {matrix[0]} + {vector[1]} * {matrix[2]} = {x}")
+    print(f"{vector[0]} * {matrix[1]} + {vector[1]} * {matrix[3]} = {y}")
     print((x, y))
     return (x, y)
+
+
+def matrixMultiplication(matrixA, matrixB):
+    """Multiplies two matrices to give the new composition"""
+    ihat = vectorTransform(matrixB, [matrixA[0], matrixA[1]])
+    jhat = vectorTransform(matrixB, [matrixA[2], matrixA[3]])
+    return [ihat[0], ihat[1], jhat[0], jhat[1]]
 
 
 def main():
@@ -41,25 +48,29 @@ def main():
                        1 linear combination of two vectors\n\
                        2 Scale a vector\n\
                        3 Transform a vector\n\
+                       4 Multiply two matrices\n\
                        Choose a number: ")
         if choice == "0":
             print("Thank you for using the linear algebra calculator")
             break
         if choice == "1":
-            vectorA = getInputVector("first")
-            vectorB = getInputVector("second")
+            vectorA = getInputVector("first vector", "a,b", 2)
+            vectorB = getInputVector("second vector", "a,b", 2)
             vectorSum(vectorA, vectorB)
             time.sleep(1)
         elif choice == "2":
-            vector = getInputVector("a")
+            vector = getInputVector("a vector", "a,b", 2)
             scalar = getInputNumber()
             vectorScale(vector, scalar)
             time.sleep(1)
         elif choice == "3":
-            ihat = getInputVector("I-hat")
-            jhat = getInputVector("J-hat")
-            vector = getInputVector("a")
-            vectorTransform(ihat, jhat, vector)
+            matrix = getInputVector("matrix", "a,b,c,d (where a,b are ihat and c,d are jhat)", 4)
+            vector = getInputVector("a vector", "a,b", 2)
+            vectorTransform(matrix, vector)
+        elif choice == "4":
+            matrixA = getInputVector("matrix of first tranformation", "a,b,c,d", 4)
+            matrixB = getInputVector("matrix of second transformation", "a,b,c,d", 4)
+            print(matrixMultiplication(matrixA, matrixB))
         else:
             print(
                 """invalid choice, enter a integer corresponding to the linear
