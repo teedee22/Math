@@ -65,8 +65,9 @@ def main():
                        1 linear combination of two vectors\n\
                        2 Scale a vector\n\
                        3 Transform a 2x2 vector\n\
-                       4 Multiply two 2x2 matrices\n\
-                       5 Multiply two 3x3 matrices\n\
+                       4 Transform a 3x3 vector\n\
+                       5 Multiply two 2x2 matrices\n\
+                       6 Multiply two 3x3 matrices\n\
                        Choose a number: ")
         if choice == "0":
             print("Thank you for using the linear algebra calculator")
@@ -86,10 +87,14 @@ def main():
             vector = getInputVector("a vector", "a,b", 2)
             vectorTransform(matrix, vector)
         elif choice == "4":
+            matrix = getInputVector("3x3 matrix", "a,b,c,d,e,f,g,h,i", 9)
+            vector = getInputVector("a 3d vector", "z,y,z", 3)
+            print(vectorTransform(matrix, vector))
+        elif choice == "5":
             matrixA = getInputVector("matrix of first tranformation", "a,b,c,d", 4)
             matrixB = getInputVector("matrix of second transformation", "a,b,c,d", 4)
             print(matrixMultiplication(matrixA, matrixB))
-        elif choice == "5":
+        elif choice == "6":
             matrixA = getInputVector("matrix of first transformation", "a,b,c,d,e,f,g,h,i", 9)
             matrixB = getInputVector("matrix of second transformation", "a,b,c,d,e,f,g,h,i", 9)
             print(matrixMultiplication(matrixA, matrixB))

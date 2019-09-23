@@ -121,6 +121,9 @@ class TestVectorTransform(unittest.TestCase):
     def test_allows_zero_input(self):
         self.assertEqual(vectorTransform([0, 0, 0, 0], [0, 0]), [0, 0])
 
+    def test_allows_3d_input(self):
+        self.assertEqual(vectorTransform([0,5,1,-2,1,4,2,5,-1], [2,5,8]), [6, 55, 14])
+
 
 class TestMatrixMultiplication(unittest.TestCase):
     """Test that matrix multiplication works"""
