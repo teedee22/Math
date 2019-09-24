@@ -93,20 +93,23 @@ class TestVectorSum(unittest.TestCase):
 
 
 class TestVectorScale(unittest.TestCase):
-    """test that vectorScale returns scaled vector as a tuple"""
+    """test that vectorScale returns scaled vector"""
 
     def test_allows_integer_input(self):
-        self.assertEqual(vectorScale((3, 4), 5), (15, 20))
+        self.assertEqual(vectorScale([3, 4], 5), [15, 20])
 
     # This test caused me to round the numbers as floating point was generating inaccuracies
     def test_allows_float_input(self):
-        self.assertEqual(vectorScale((3.2, 3.8), 6.3), (20.16, 23.94))
+        self.assertEqual(vectorScale([3.2, 3.8], 6.3), [20.16, 23.94])
 
     def test_allows_negative_input(self):
-        self.assertEqual(vectorScale((-3, -0.5), -1), (3, 0.5))
+        self.assertEqual(vectorScale([-3, -0.5], -1), [3, 0.5])
 
     def test_allows_zero_input(self):
-        self.assertEqual(vectorScale((0, 0), 0), (0, 0))
+        self.assertEqual(vectorScale([0, 0], 0), [0, 0])
+
+    def test_allows_3d_input(self):
+        self.assertEqual(vectorScale([4, 8, 2], 2), [8, 16, 4])
 
 
 class TestVectorTransform(unittest.TestCase):

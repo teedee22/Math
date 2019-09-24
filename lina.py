@@ -13,18 +13,16 @@ def vectorSum(vectorA, vectorB):
 
 
 def vectorScale(vector, scalar):
-    """Scale a vector by a float"""
+    """list -> list Scale any vector by a float"""
     # Rounded to 10 decimal places to avoid floating point inaccuracies
-    scaledVector = (
-        round(vector[0] * scalar, 10),
-        round(vector[1] * scalar, 10),
-    )
+    scaledVector = [round(scalar * i, 10) for i in vector]
     print(f"{scalar} x {vector} = {scaledVector}")
     return scaledVector
 
 
 def vectorTransform(matrix, vector):
-    """transform a vector based from ihat/jhat matrix input: list, output: list"""
+    """ List -> List
+    Transform a vector from a matrix input: list, output: list"""
     # 4x4 matrix by vector x,y
     if len(matrix) == 4 and len(vector) == 2:
         i = round(vector[0] * matrix[0] + vector[1] * matrix[2], 10)
@@ -43,7 +41,7 @@ def vectorTransform(matrix, vector):
 
 
 def matrixMultiplication(matrixA, matrixB):
-    """Multiplies two matrices to give the new composition input: list, output: list"""
+    """Multiplies matrices to give the new composition input: list, output: list"""
     # 4x4 matrix
     if len(matrixA) == 4 == len(matrixB):
         ihat = vectorTransform(matrixB, [matrixA[0], matrixA[1]])
@@ -55,6 +53,7 @@ def matrixMultiplication(matrixA, matrixB):
         jhat = vectorTransform(matrixB, [matrixA[3], matrixA[4], matrixA[5]])
         khat = vectorTransform(matrixB, [matrixA[6], matrixA[7], matrixA[8]])
         return ihat + jhat + khat
+
 
 
 def main():
